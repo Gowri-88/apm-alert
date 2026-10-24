@@ -10,7 +10,8 @@ SEEN_FILE = "seen.json"
 TITLE_INCLUDE = re.compile(
     r"associate product manager|\bapm\b|product associate|associate product|"
     r"junior product manager|product analyst|product management intern|"
-    r"product intern|graduate product|product trainee|"
+    r"product intern|graduate product|product trainee|product management associate|"
+    r"associate,? product|product operations|product ops|technical product associate|"
     r"product manager.{0,10}(fresher|entry|0-1|0-2)|"
     r"founder.{0,2}s? office.{0,40}product|product.{0,40}founder.{0,2}s? office",
     re.I)
@@ -37,20 +38,21 @@ def fetch(ats, slug):
         for j in d.get("jobs", []):
             out.append(dict(id=f"gh-{slug}-{j['id']}", title=j["title"],
                             location=(j.get("location") or {}).get("name", ""),
-                            url=j["absolute_url"]))
+                            url=j["absolute_url"], gh_id=j["id"]))
     elif ats == "lever":
         d = get_json(f"https://api.lever.co/v0/postings/{slug}?mode=json")
         for j in d:
             out.append(dict(id=f"lv-{slug}-{j['id']}", title=j["text"],
                             location=(j.get("categories") or {}).get("location", "") or "",
-                            url=j["hostedUrl"]))
+                            url=j["hostedUrl"], desc=j.get("descriptionPlain", "") or ""))
     elif ats == "ashby":
         d = get_json(f"https://api.ashbyhq.com/posting-api/job-board/{slug}")
         for j in d.get("jobs", []):
             if j.get("isListed", True):
                 out.append(dict(id=f"ab-{slug}-{j['id']}", title=j["title"],
                                 location=j.get("location", "") or "",
-                                url=j.get("jobUrl") or f"https://jobs.ashbyhq.com/{slug}/{j['id']}"))
+                                url=j.get("jobUrl") or f"https://jobs.ashbyhq.com/{slug}/{j['id']}",
+                                desc=j.get("descriptionPlain", "") or ""))
     elif ats == "smartrecruiters":
         d = get_json(f"https://api.smartrecruiters.com/v1/companies/{slug}/postings?limit=100")
         for j in d.get("content", []):
@@ -61,6 +63,32 @@ def fetch(ats, slug):
     for j in out:
         j["company"] = slug
     return out
+
+
+import html as _html
+EXP_RE = re.compile(r"(\d{1,2})\s*(?:\+|-|–|to)?\s*(\d{1,2})?\s*\+?\s*(?:years|yrs|year)", re.I)
+MAX_MIN_YEARS = 1   # skip jobs whose stated minimum experience is above this
+
+def min_years(text):
+    """Smallest 'N years' figure stated near the word experience; None if not stated."""
+    text = _html.unescape(re.sub(r"<[^>]+>", " ", text or ""))
+    found = []
+    for m in EXP_RE.finditer(text):
+        ctx = text[max(0, m.start() - 80): m.end() + 80].lower()
+        if "experience" in ctx or "exp" in ctx:
+            found.append(int(m.group(1)))
+    return min(found) if found else None
+
+def too_senior(j):
+    if j.get("gh_id") and not j.get("desc"):
+        try:
+            d = get_json(f"https://boards-api.greenhouse.io/v1/boards/{j['company']}/jobs/{j['gh_id']}")
+            j["desc"] = d.get("content", "")
+        except Exception:
+            return False
+    y = min_years(j.get("desc", ""))
+    j["exp"] = "not stated" if y is None else f"{y}+ yrs stated"
+    return y is not None and y > MAX_MIN_YEARS
 
 def loc_ok(loc):
     if LOCATION_INCLUDE.search(loc):
@@ -123,7 +151,7 @@ def send_email(jobs):
     msg = EmailMessage()
     msg["Subject"] = f"🚀 {len(jobs)} new APM/Product Associate job(s) in Bangalore"
     msg["From"], msg["To"] = user, to
-    lines = [f"{j['title']}\n{j['company']} | {j['location']}\nAPPLY NOW: {j['url']}\n" for j in jobs]
+    lines = [f"{j['title']}\n{j['company']} | {j['location']} | Experience: {j.get('exp','not stated')}\nAPPLY NOW: {j['url']}\n" for j in jobs]
     msg.set_content("\n".join(lines))
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context()) as s:
         s.login(user, pw)
@@ -148,8 +176,11 @@ def main():
                 continue
             for j in jobs:
                 if matches(j) and j["id"] not in seen:
-                    new.append(j)
                     seen.add(j["id"])
+                    if too_senior(j):
+                        print("  skipped (experience):", j["title"], "|", j["company"], "|", j["exp"])
+                        continue
+                    new.append(j)
     print(f"Checked {len(companies)} boards, {len(dead)} unreachable, {len(new)} new matches.")
     if no_ats:
         print("Not on Greenhouse/Lever/Ashby/SmartRecruiters (watch these manually):", *no_ats, sep="\n  ")
