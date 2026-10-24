@@ -1,0 +1,185 @@
+# Just write company NAMES. The script auto-detects whether each uses
+# Greenhouse / Lever / Ashby / SmartRecruiters and remembers it (resolved.json).
+# Companies on other systems are listed in the run log so you can watch them manually.
+# To force a known board, use ats:slug  (e.g. lever:zeta  - confirmed to exist)
+
+lever:zeta
+
+# --- Bangalore startups seen hiring APM/Product Associate roles in recent searches ---
+Gushwork
+Pocket FM
+Apna
+HyperVerge
+BestDoc
+RetainIQ
+Niyo
+Tracxn
+Paytm
+Uplers
+Scoutit
+Onsurity
+
+# --- Well-known funded product startups/scaleups in Bangalore (verify stage yourself) ---
+Razorpay
+Groww
+CRED
+Zepto
+Meesho
+Postman
+BrowserStack
+Chargebee
+Whatfix
+CleverTap
+Unacademy
+Khatabook
+Slice
+Jar
+Rapido
+Spotdraft
+Sarvam
+Atlan
+Rocketlane
+Zluri
+Hevo
+Scaler
+Juspay
+Setu
+Navi
+Jupiter
+Ultrahuman
+Cars24
+Licious
+Eloelo
+Kuku FM
+Observe.AI
+Uniphore
+Hasura
+Springworks
+Spyne
+Mindtickle
+Sprinklr
+Druva
+InMobi
+Ather
+Vedantu
+Open Financial
+Fi Money
+Dunzo
+Swiggy
+Flipkart
+PhonePe
+Zomato
+
+# --- YC-backed, Bengaluru-based (from ycombinator.com/companies/location/india, Oct 2026) ---
+Bolna AI
+Clueso
+SuperKalam
+Floworks
+Gullak Money
+Material Depot
+Peoplebox.ai
+CompUp
+Flux Auto
+RecordBook
+Infinity
+PrimeVault
+SALT
+Coupl
+DrDroid
+Yenmo
+xPay
+Cardboard
+Lab0
+Redapto
+Emergent
+WareIQ
+Paasa
+SureBright
+
+# --- More Bangalore product startups / scaleups (stage not verified) ---
+Pocket Aces
+Lenskart
+Urban Company
+Dream11
+Mpl
+Games24x7
+Zeta
+Sharechat
+Moj
+Nykaa
+Myntra
+Cure.fit
+Cult.fit
+Practo
+Pristyn Care
+Innovaccer
+Netradyne
+Skit.ai
+Yellow.ai
+Gupshup
+Freshworks
+Zoho
+Darwinbox
+Keka
+Leena AI
+Exotel
+Ola Electric
+Krutrim
+Simpl
+LazyPay
+Mintifi
+Credgenics
+Perfios
+Zerodha
+Smallcase
+Kuvera
+INDmoney
+Stable Money
+Snapmint
+Uni Cards
+Fampay
+Pesto
+Masai
+Newton School
+Eduvanz
+Leap Scholar
+Classplus
+Teachmint
+Lido
+Cuemath
+Toppr
+Seekho
+Pratilipi
+Headout
+Ixigo
+Zostel
+Rentomojo
+Furlenco
+Pepperfry
+Bluestone
+Wakefit
+Sleepy Owl
+Country Delight
+Milkbasket
+Otipy
+DealShare
+Jumbotail
+Udaan
+Ninjacart
+Agrim
+DeHaat
+Bijnis
+Captain Fresh
+Shadowfax
+Delhivery
+Porter
+Blackbuck
+Zypp
+Yulu
+Bounce
+Vogo
+Revfin
+Euler Motors
+Log9
+Ultraviolette
+Sarla Aviation
