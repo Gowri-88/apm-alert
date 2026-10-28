@@ -130,6 +130,8 @@ def resolve(name, resolved, now):
         for ats in ATS_ORDER:
             try:
                 jobs = fetch(ats, slug)
+                if not jobs:      # some ATS APIs return 200 + empty list for ANY name
+                    continue
                 resolved[name] = {"ats": ats, "slug": slug}
                 print(f"  detected {name} -> {ats}:{slug} ({len(jobs)} jobs)")
                 return (ats, slug)
