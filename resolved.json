@@ -1,1 +1,686 @@
-{}
+{
+ "Gushwork": {
+  "ats": "lever",
+  "slug": "gushwork"
+ },
+ "Pocket FM": {
+  "ats": "lever",
+  "slug": "pocketfm"
+ },
+ "Apna": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "HyperVerge": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "BestDoc": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "RetainIQ": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Niyo": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Tracxn": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Paytm": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Uplers": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Scoutit": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Onsurity": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Razorpay": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Groww": {
+  "ats": "greenhouse",
+  "slug": "groww"
+ },
+ "CRED": {
+  "ats": "lever",
+  "slug": "cred"
+ },
+ "Zepto": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Meesho": {
+  "ats": "lever",
+  "slug": "meesho"
+ },
+ "Postman": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "BrowserStack": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Chargebee": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Whatfix": {
+  "ats": "smartrecruiters",
+  "slug": "whatfix"
+ },
+ "CleverTap": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Unacademy": {
+  "ats": "smartrecruiters",
+  "slug": "unacademy"
+ },
+ "Khatabook": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Slice": {
+  "ats": "greenhouse",
+  "slug": "slice"
+ },
+ "Jar": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Rapido": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Spotdraft": {
+  "ats": "ashby",
+  "slug": "spotdraft"
+ },
+ "Sarvam": {
+  "ats": "ashby",
+  "slug": "sarvam"
+ },
+ "Atlan": {
+  "ats": "ashby",
+  "slug": "atlan"
+ },
+ "Rocketlane": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Zluri": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Hevo": {
+  "ats": "lever",
+  "slug": "hevo"
+ },
+ "Scaler": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Juspay": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Setu": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Navi": {
+  "ats": "ashby",
+  "slug": "navi"
+ },
+ "Jupiter": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Ultrahuman": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Cars24": {
+  "ats": "smartrecruiters",
+  "slug": "cars24"
+ },
+ "Licious": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Eloelo": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Kuku FM": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Observe.AI": {
+  "ats": "greenhouse",
+  "slug": "observeai"
+ },
+ "Uniphore": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Hasura": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Springworks": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Spyne": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Mindtickle": {
+  "ats": "lever",
+  "slug": "mindtickle"
+ },
+ "Sprinklr": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Druva": {
+  "ats": "greenhouse",
+  "slug": "druva"
+ },
+ "InMobi": {
+  "ats": "greenhouse",
+  "slug": "inmobi"
+ },
+ "Ather": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Vedantu": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Open Financial": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Fi Money": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Dunzo": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Swiggy": {
+  "ats": "smartrecruiters",
+  "slug": "swiggy"
+ },
+ "Flipkart": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "PhonePe": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Zomato": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Bolna AI": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Clueso": {
+  "ats": "ashby",
+  "slug": "clueso"
+ },
+ "SuperKalam": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Floworks": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Gullak Money": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Material Depot": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Peoplebox.ai": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "CompUp": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Flux Auto": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "RecordBook": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Infinity": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "PrimeVault": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "SALT": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Coupl": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "DrDroid": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Yenmo": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "xPay": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Cardboard": {
+  "ats": "ashby",
+  "slug": "cardboard"
+ },
+ "Lab0": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Redapto": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Emergent": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "WareIQ": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Paasa": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "SureBright": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Pocket Aces": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Lenskart": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Urban Company": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Dream11": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Mpl": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Games24x7": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Zeta": {
+  "ats": "lever",
+  "slug": "zeta"
+ },
+ "Sharechat": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Moj": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Nykaa": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Myntra": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Cure.fit": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Cult.fit": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Practo": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Pristyn Care": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Innovaccer": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Netradyne": {
+  "ats": "greenhouse",
+  "slug": "netradyne"
+ },
+ "Skit.ai": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Yellow.ai": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Gupshup": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Freshworks": {
+  "ats": "smartrecruiters",
+  "slug": "freshworks"
+ },
+ "Zoho": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Darwinbox": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Keka": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Leena AI": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Exotel": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Ola Electric": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Krutrim": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Simpl": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "LazyPay": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Mintifi": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Credgenics": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Perfios": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Zerodha": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Smallcase": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Kuvera": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "INDmoney": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Stable Money": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Snapmint": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Uni Cards": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Fampay": {
+  "ats": "lever",
+  "slug": "fampay"
+ },
+ "Pesto": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Masai": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Newton School": {
+  "ats": "smartrecruiters",
+  "slug": "newtonschool"
+ },
+ "Eduvanz": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Leap Scholar": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Classplus": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Teachmint": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Lido": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Cuemath": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Toppr": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Seekho": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Pratilipi": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Headout": {
+  "ats": "ashby",
+  "slug": "headout"
+ },
+ "Ixigo": {
+  "ats": "smartrecruiters",
+  "slug": "ixigo"
+ },
+ "Zostel": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Rentomojo": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Furlenco": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Pepperfry": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Bluestone": {
+  "ats": "greenhouse",
+  "slug": "bluestone"
+ },
+ "Wakefit": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Sleepy Owl": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Country Delight": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Milkbasket": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Otipy": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "DealShare": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Jumbotail": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Udaan": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Ninjacart": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Agrim": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "DeHaat": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Bijnis": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Captain Fresh": {
+  "ats": "smartrecruiters",
+  "slug": "captainfresh"
+ },
+ "Shadowfax": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Delhivery": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Porter": {
+  "ats": "greenhouse",
+  "slug": "porter"
+ },
+ "Blackbuck": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Zypp": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Yulu": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Bounce": {
+  "ats": "ashby",
+  "slug": "bounce"
+ },
+ "Vogo": {
+  "ats": "lever",
+  "slug": "vogo"
+ },
+ "Revfin": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Euler Motors": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Log9": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Ultraviolette": {
+  "ats": null,
+  "tried": 1793202890
+ },
+ "Sarla Aviation": {
+  "ats": null,
+  "tried": 1793202890
+ }
+}
