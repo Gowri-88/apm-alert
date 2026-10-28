@@ -183,3 +183,15 @@ Euler Motors
 Log9
 Ultraviolette
 Sarla Aviation
+
+# ===== PASTE CAREERS-PAGE LINKS HERE (one per line, no # in front) =====
+# The script now recognises these automatically from the link:
+#   Workday, Greenhouse, Lever, Ashby, SmartRecruiters, Workable, Recruitee,
+#   BambooHR, Keka, Zoho Recruit, Freshteam.
+# Any OTHER link is treated as a plain web page and scanned for APM / Product
+# Associate style titles (works only if the page shows jobs without JavaScript).
+# Examples (remove the # and replace with the real link):
+# https://COMPANY.wd5.myworkdayjobs.com/en-US/SITENAME
+# https://COMPANY.keka.com/careers/
+# https://COMPANY.zohorecruit.in/jobs/Careers
+# https://COMPANY.freshteam.com/jobs

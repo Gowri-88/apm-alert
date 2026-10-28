@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Free APM / Product Associate job alerts for Bangalore. Stdlib only."""
-import json, os, re, smtplib, ssl, sys, urllib.request, urllib.error
+import html as _html, hashlib, json, os, re, smtplib, ssl, sys, urllib.request, urllib.error
+from urllib.parse import urlparse
 from email.message import EmailMessage
 from concurrent.futures import ThreadPoolExecutor
 
@@ -23,12 +24,59 @@ LOCATION_INCLUDE = re.compile(r"bangalore|bengaluru|blr", re.I)
 ALLOW_REMOTE_INDIA = True   # also alert for "Remote - India" roles
 # --------------------------------------------------------------------------
 
-UA = {"User-Agent": "Mozilla/5.0 (job-alert-bot)"}
+UA = {"User-Agent": "Mozilla/5.0 (job-alert-bot)", "Accept": "application/json, text/html;q=0.9"}
 
 def get_json(url):
     req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=25) as r:
         return json.load(r)
+
+def post_json(url, body):
+    req = urllib.request.Request(url, data=json.dumps(body).encode(),
+                                 headers={**UA, "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=25) as r:
+        return json.load(r)
+
+def get_text(url):
+    req = urllib.request.Request(url, headers=UA)
+    with urllib.request.urlopen(req, timeout=25) as r:
+        return r.read().decode("utf-8", errors="replace")
+
+def clean(t):
+    return re.sub(r"\s+", " ", _html.unescape(re.sub(r"<[^>]+>", " ", t or ""))).strip()
+
+def scan_page(url, label):
+    """Generic fallback: read a static careers page and pick out lines that look like our target titles."""
+    html = get_text(url)
+    html = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", html, flags=re.S | re.I)
+    text = _html.unescape(re.sub(r"<[^>]+>", "\n", html))
+    out = []
+    for line in dict.fromkeys(l.strip() for l in text.splitlines()):
+        if 3 < len(line) < 120 and TITLE_INCLUDE.search(line):
+            h = hashlib.md5((url + line).encode()).hexdigest()[:12]
+            out.append(dict(id=f"pg-{label}-{h}", title=line, location="", url=url, loc_unknown=True))
+    return out
+
+def from_url(u):
+    """Turn a careers-page link into (ats, slug)."""
+    p = urlparse(u)
+    host = p.netloc.lower()
+    parts = [x for x in p.path.split("/") if x]
+    first = parts[0] if parts else ""
+    if host.endswith("myworkdayjobs.com"):
+        parts = [x for x in parts if not re.fullmatch(r"[a-z]{2}[-_][A-Za-z]{2}", x)]
+        return ("workday", f"{host}|{parts[0]}")
+    if host.endswith("greenhouse.io"):          return ("greenhouse", first)
+    if host == "jobs.lever.co":                 return ("lever", first)
+    if host == "jobs.ashbyhq.com":              return ("ashby", first)
+    if host.endswith("smartrecruiters.com"):    return ("smartrecruiters", first)
+    if host == "apply.workable.com":            return ("workable", first)
+    if host.endswith(".recruitee.com"):         return ("recruitee", host.split(".")[0])
+    if host.endswith(".bamboohr.com"):          return ("bamboohr", host.split(".")[0])
+    if host.endswith(".keka.com"):              return ("keka", host.split(".")[0])
+    if ".zohorecruit." in host:                 return ("zoho", host)
+    if host.endswith(".freshteam.com"):         return ("freshteam", host.split(".")[0])
+    return ("page", u)
 
 def fetch(ats, slug):
     """Return list of dicts: id, title, location, url, company."""
@@ -60,8 +108,69 @@ def fetch(ats, slug):
             out.append(dict(id=f"sr-{slug}-{j['id']}", title=j["name"],
                             location=f"{loc.get('city','')}, {loc.get('country','')}",
                             url=f"https://jobs.smartrecruiters.com/{slug}/{j['id']}"))
+    elif ats == "workday":
+        host, site = slug.split("|")
+        tenant = host.split(".")[0]
+        base = f"https://{host}/wday/cxs/{tenant}/{site}"
+        offset, total, label = 0, 1, tenant
+        while offset < min(total, 100):
+            d = post_json(f"{base}/jobs", {"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": "product"})
+            total = d.get("total", 0)
+            posts = d.get("jobPostings", [])
+            if not posts:
+                break
+            for p in posts:
+                path = p.get("externalPath", "")
+                out.append(dict(id=f"wd-{tenant}-{path}", title=p.get("title", ""),
+                                location=p.get("locationsText", "") or "",
+                                url=f"https://{host}/{site}{path}", detail=f"{base}{path}"))
+            offset += 20
+    elif ats == "workable":
+        d = get_json(f"https://apply.workable.com/api/v1/widget/accounts/{slug}?details=true")
+        for j in d.get("jobs", []):
+            loc = ", ".join(x for x in [j.get("city"), j.get("state"), j.get("country")] if x)
+            out.append(dict(id=f"wk-{slug}-{j.get('shortcode')}", title=j.get("title", ""), location=loc,
+                            url=j.get("url") or f"https://apply.workable.com/{slug}/j/{j.get('shortcode')}/",
+                            desc=j.get("description", "") or ""))
+    elif ats == "recruitee":
+        d = get_json(f"https://{slug}.recruitee.com/api/offers/")
+        for j in d.get("offers", []):
+            loc = j.get("location") or ", ".join(x for x in [j.get("city"), j.get("country")] if x)
+            out.append(dict(id=f"rc-{slug}-{j['id']}", title=j.get("title", ""), location=loc or "",
+                            url=j.get("careers_url", ""), desc=j.get("description", "") or ""))
+    elif ats == "bamboohr":
+        d = get_json(f"https://{slug}.bamboohr.com/careers/list")
+        for j in d.get("result", []):
+            l = j.get("location") or {}
+            loc = ", ".join(x for x in [l.get("city"), l.get("state")] if x)
+            out.append(dict(id=f"bb-{slug}-{j['id']}", title=j.get("jobOpeningName", ""), location=loc,
+                            url=f"https://{slug}.bamboohr.com/careers/{j['id']}"))
+    elif ats == "zoho":
+        html = get_text(f"https://{slug}/jobs/Careers")
+        m = re.search(r'id="jobs"[^>]*value="([^"]*)"', html) or re.search(r'value="([^"]*)"[^>]*id="jobs"', html)
+        if not m:
+            raise ValueError("Zoho jobs data not found on page")
+        for p in json.loads(_html.unescape(m.group(1))):
+            loc = ", ".join(x for x in [p.get("City"), p.get("State"), p.get("Country")] if x)
+            out.append(dict(id=f"zo-{slug}-{p.get('id')}", title=p.get("Posting_Title") or p.get("Job_Opening_Name") or "",
+                            location=loc, url=f"https://{slug}/jobs/Careers/{p.get('id')}"))
+    elif ats == "freshteam":
+        host = f"{slug}.freshteam.com"
+        html = get_text(f"https://{host}/jobs")
+        for href, inner in re.findall(r'<a[^>]+href="(/jobs/[^"#?]+)"[^>]*>(.*?)</a>', html, re.S):
+            title = clean(inner)
+            if title:
+                out.append(dict(id=f"ft-{slug}-{href}", title=title, location="",
+                                url=f"https://{host}{href}", loc_unknown=True))
+    elif ats == "keka":
+        out = scan_page(f"https://{slug}.keka.com/careers/", slug)
+    elif ats == "page":
+        out = scan_page(slug, urlparse(slug).netloc)
+    label = slug
+    if ats == "workday":  label = slug.split("|")[0].split(".")[0]
+    if ats == "page":     label = urlparse(slug).netloc
     for j in out:
-        j["company"] = slug
+        j.setdefault("company", label)
     return out
 
 
@@ -86,6 +195,11 @@ def too_senior(j):
             j["desc"] = d.get("content", "")
         except Exception:
             return False
+    if j.get("detail") and not j.get("desc"):
+        try:
+            j["desc"] = get_json(j["detail"]).get("jobPostingInfo", {}).get("jobDescription", "")
+        except Exception:
+            return False
     y = min_years(j.get("desc", ""))
     j["exp"] = "not stated" if y is None else f"{y}+ yrs stated"
     return y is not None and y > MAX_MIN_YEARS
@@ -93,10 +207,12 @@ def too_senior(j):
 def loc_ok(loc):
     if LOCATION_INCLUDE.search(loc):
         return True
+    if re.search(r"\d+\s+locations?|multiple locations", loc, re.I):   # Workday hides the list; check the listing
+        return True
     return ALLOW_REMOTE_INDIA and re.search(r"remote", loc, re.I) and re.search(r"india|\bin\b", loc, re.I)
 
 def matches(j):
-    return TITLE_INCLUDE.search(j["title"]) and not TITLE_EXCLUDE.search(j["title"]) and loc_ok(j["location"])
+    return TITLE_INCLUDE.search(j["title"]) and not TITLE_EXCLUDE.search(j["title"]) and (loc_ok(j["location"]) or j.get("loc_unknown"))
 
 RESOLVED_FILE = "resolved.json"   # remembers which ATS each company uses
 RETRY_DAYS = 7                    # re-try unresolved companies weekly
@@ -108,7 +224,7 @@ def slug_variants(name):
     return list(dict.fromkeys(v for v in vs if v))
 
 def load_companies():
-    """Lines are either 'Company Name' (auto-detect) or 'ats:slug' (explicit)."""
+    """Lines are a Company Name (auto-detect), ats:slug, or a careers-page URL."""
     cos = []
     for line in open("companies.txt"):
         line = line.split("#")[0].strip()
@@ -118,6 +234,8 @@ def load_companies():
 
 def resolve(name, resolved, now):
     """Return (ats, slug) or None. Auto-detects by trying each ATS."""
+    if name.lower().startswith("http"):
+        return from_url(name)
     if ":" in name:
         a, s_ = [x.strip() for x in name.split(":", 1)]
         return (a.lower(), s_)
@@ -153,7 +271,7 @@ def send_email(jobs):
     msg = EmailMessage()
     msg["Subject"] = f"🚀 {len(jobs)} new APM/Product Associate job(s) in Bangalore"
     msg["From"], msg["To"] = user, to
-    lines = [f"{j['title']}\n{j['company']} | {j['location']} | Experience: {j.get('exp','not stated')}\nAPPLY NOW: {j['url']}\n" for j in jobs]
+    lines = [f"{j['title']}\n{j['company']} | {j['location'] or 'location not shown - check listing'} | Experience: {j.get('exp','not stated')}\nAPPLY NOW: {j['url']}\n" for j in jobs]
     msg.set_content("\n".join(lines))
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context()) as s:
         s.login(user, pw)
@@ -185,7 +303,7 @@ def main():
                     new.append(j)
     print(f"Checked {len(companies)} boards, {len(dead)} unreachable, {len(new)} new matches.")
     if no_ats:
-        print("Not on Greenhouse/Lever/Ashby/SmartRecruiters (watch these manually):", *no_ats, sep="\n  ")
+        print("Not found automatically - paste their careers-page URL into companies.txt:", *no_ats, sep="\n  ")
     if dead:
         print("Unreachable (wrong slug or not on this ATS):", *dead, sep="\n  ")
     if new:
