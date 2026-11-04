@@ -9,47 +9,47 @@
  },
  "Apna": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "HyperVerge": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "BestDoc": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "RetainIQ": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Niyo": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Tracxn": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Paytm": {
-  "ats": null,
-  "tried": 1793202890
+  "ats": "lever",
+  "slug": "paytm"
  },
  "Uplers": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Scoutit": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Onsurity": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Razorpay": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Groww": {
   "ats": "greenhouse",
@@ -61,7 +61,7 @@
  },
  "Zepto": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Meesho": {
   "ats": "lever",
@@ -69,15 +69,15 @@
  },
  "Postman": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "BrowserStack": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Chargebee": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Whatfix": {
   "ats": "smartrecruiters",
@@ -85,7 +85,7 @@
  },
  "CleverTap": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Unacademy": {
   "ats": "smartrecruiters",
@@ -93,7 +93,7 @@
  },
  "Khatabook": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Slice": {
   "ats": "greenhouse",
@@ -101,11 +101,11 @@
  },
  "Jar": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Rapido": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Spotdraft": {
   "ats": "ashby",
@@ -121,11 +121,11 @@
  },
  "Rocketlane": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Zluri": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Hevo": {
   "ats": "lever",
@@ -133,15 +133,15 @@
  },
  "Scaler": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Juspay": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Setu": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Navi": {
   "ats": "ashby",
@@ -149,11 +149,11 @@
  },
  "Jupiter": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Ultrahuman": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Cars24": {
   "ats": "smartrecruiters",
@@ -161,15 +161,15 @@
  },
  "Licious": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Eloelo": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Kuku FM": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Observe.AI": {
   "ats": "greenhouse",
@@ -177,19 +177,19 @@
  },
  "Uniphore": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Hasura": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Springworks": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Spyne": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Mindtickle": {
   "ats": "lever",
@@ -197,7 +197,7 @@
  },
  "Sprinklr": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Druva": {
   "ats": "greenhouse",
@@ -209,23 +209,23 @@
  },
  "Ather": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Vedantu": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Open Financial": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Fi Money": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Dunzo": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Swiggy": {
   "ats": "smartrecruiters",
@@ -233,19 +233,19 @@
  },
  "Flipkart": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "PhonePe": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Zomato": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Bolna AI": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Clueso": {
   "ats": "ashby",
@@ -253,63 +253,63 @@
  },
  "SuperKalam": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Floworks": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Gullak Money": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Material Depot": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Peoplebox.ai": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "CompUp": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Flux Auto": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "RecordBook": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Infinity": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "PrimeVault": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "SALT": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Coupl": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "DrDroid": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Yenmo": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "xPay": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Cardboard": {
   "ats": "ashby",
@@ -317,51 +317,51 @@
  },
  "Lab0": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Redapto": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Emergent": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "WareIQ": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Paasa": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "SureBright": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Pocket Aces": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Lenskart": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Urban Company": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Dream11": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Mpl": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Games24x7": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Zeta": {
   "ats": "lever",
@@ -369,39 +369,39 @@
  },
  "Sharechat": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Moj": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Nykaa": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Myntra": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Cure.fit": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Cult.fit": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Practo": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Pristyn Care": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Innovaccer": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Netradyne": {
   "ats": "greenhouse",
@@ -409,15 +409,15 @@
  },
  "Skit.ai": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Yellow.ai": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Gupshup": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Freshworks": {
   "ats": "smartrecruiters",
@@ -425,79 +425,79 @@
  },
  "Zoho": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Darwinbox": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Keka": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Leena AI": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Exotel": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Ola Electric": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Krutrim": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Simpl": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "LazyPay": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Mintifi": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Credgenics": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Perfios": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Zerodha": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Smallcase": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Kuvera": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "INDmoney": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Stable Money": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Snapmint": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Uni Cards": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Fampay": {
   "ats": "lever",
@@ -505,11 +505,11 @@
  },
  "Pesto": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Masai": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Newton School": {
   "ats": "smartrecruiters",
@@ -517,39 +517,39 @@
  },
  "Eduvanz": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Leap Scholar": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Classplus": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Teachmint": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Lido": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Cuemath": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Toppr": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Seekho": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Pratilipi": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Headout": {
   "ats": "ashby",
@@ -561,19 +561,19 @@
  },
  "Zostel": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Rentomojo": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Furlenco": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Pepperfry": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Bluestone": {
   "ats": "greenhouse",
@@ -581,51 +581,51 @@
  },
  "Wakefit": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Sleepy Owl": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Country Delight": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Milkbasket": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Otipy": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "DealShare": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Jumbotail": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Udaan": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Ninjacart": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Agrim": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "DeHaat": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Bijnis": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Captain Fresh": {
   "ats": "smartrecruiters",
@@ -633,11 +633,11 @@
  },
  "Shadowfax": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Delhivery": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Porter": {
   "ats": "greenhouse",
@@ -645,15 +645,15 @@
  },
  "Blackbuck": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Zypp": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Yulu": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Bounce": {
   "ats": "ashby",
@@ -665,22 +665,22 @@
  },
  "Revfin": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Euler Motors": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Log9": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Ultraviolette": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  },
  "Sarla Aviation": {
   "ats": null,
-  "tried": 1793202890
+  "tried": 1793808704
  }
 }
