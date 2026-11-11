@@ -78,6 +78,26 @@ def from_url(u):
     if host.endswith(".freshteam.com"):         return ("freshteam", host.split(".")[0])
     return ("page", u)
 
+
+from datetime import datetime, timezone
+
+def _ms_to_iso(ms):
+    try:
+        return datetime.fromtimestamp(int(ms) / 1000, timezone.utc).isoformat()
+    except Exception:
+        return ""
+
+def age_str(iso):
+    """'posted 5h ago' / '3d ago' from an ISO timestamp; '' if unknown."""
+    try:
+        t = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+        if t.tzinfo is None:
+            t = t.replace(tzinfo=timezone.utc)
+        h = (datetime.now(timezone.utc) - t).total_seconds() / 3600
+        return f"posted {int(h)}h ago" if h < 48 else f"posted {int(h // 24)}d ago"
+    except Exception:
+        return ""
+
 def fetch(ats, slug):
     """Return list of dicts: id, title, location, url, company."""
     out = []
@@ -86,21 +106,28 @@ def fetch(ats, slug):
         for j in d.get("jobs", []):
             out.append(dict(id=f"gh-{slug}-{j['id']}", title=j["title"],
                             location=(j.get("location") or {}).get("name", ""),
-                            url=j["absolute_url"], gh_id=j["id"]))
+                            url=j["absolute_url"], gh_id=j["id"],
+                            posted=j.get("first_published") or j.get("updated_at") or ""))
     elif ats == "lever":
         d = get_json(f"https://api.lever.co/v0/postings/{slug}?mode=json")
         for j in d:
             out.append(dict(id=f"lv-{slug}-{j['id']}", title=j["text"],
                             location=(j.get("categories") or {}).get("location", "") or "",
-                            url=j["hostedUrl"], desc=j.get("descriptionPlain", "") or ""))
+                            url=j["hostedUrl"], desc=j.get("descriptionPlain", "") or "",
+                            posted=_ms_to_iso(j.get("createdAt"))))
     elif ats == "ashby":
         d = get_json(f"https://api.ashbyhq.com/posting-api/job-board/{slug}")
         for j in d.get("jobs", []):
-            if j.get("isListed", True):
-                out.append(dict(id=f"ab-{slug}-{j['id']}", title=j["title"],
-                                location=j.get("location", "") or "",
-                                url=j.get("jobUrl") or f"https://jobs.ashbyhq.com/{slug}/{j['id']}",
-                                desc=j.get("descriptionPlain", "") or ""))
+            if not j.get("isListed", True):
+                continue
+            locs = [j.get("location") or ""] + [x.get("location", "") for x in (j.get("secondaryLocations") or [])]
+            link = j.get("jobUrl") or j.get("applyUrl") or ""
+            out.append(dict(id=f"ab-{slug}-{j.get('id') or link}", title=j.get("title", ""),
+                            location=" | ".join(l for l in locs if l),
+                            url=link, apply=j.get("applyUrl", ""),
+                            posted=j.get("publishedAt", "") or "",
+                            emp=j.get("employmentType", "") or "",
+                            desc=j.get("descriptionPlain", "") or ""))
     elif ats == "smartrecruiters":
         d = get_json(f"https://api.smartrecruiters.com/v1/companies/{slug}/postings?limit=100")
         for j in d.get("content", []):
@@ -164,6 +191,31 @@ def fetch(ats, slug):
                                 url=f"https://{host}{href}", loc_unknown=True))
     elif ats == "keka":
         out = scan_page(f"https://{slug}.keka.com/careers/", slug)
+    elif ats == "yc":
+        from urllib.parse import quote
+        html = get_text(f"https://www.ycombinator.com/jobs?query={quote(slug)}")
+        m = re.search(r'data-page="([^"]+)"', html)
+        if not m:
+            raise ValueError("YC jobs data not found (page layout may have changed)")
+        found, stack = [], [json.loads(_html.unescape(m.group(1)))]
+        while stack:
+            x = stack.pop()
+            if isinstance(x, dict):
+                if isinstance(x.get("title"), str) and (x.get("applyUrl") or x.get("url")):
+                    found.append(x)
+                stack.extend(x.values())
+            elif isinstance(x, list):
+                stack.extend(x)
+        for d in found:
+            url = d.get("applyUrl") or d.get("url") or ""
+            if url.startswith("/"):
+                url = "https://www.ycombinator.com" + url
+            exp = d.get("minExperience") or d.get("experience") or ""
+            digits = re.search(r"\d+", str(exp))
+            out.append(dict(id=f"yc-{d.get('id') or url}", title=d["title"],
+                            location=str(d.get("location") or d.get("prettyLocation") or ""),
+                            url=url, company=str(d.get("companyName") or d.get("company") or "YC startup"),
+                            desc=(f"{digits.group()} years experience" if digits else "")))
     elif ats == "page":
         out = scan_page(slug, urlparse(slug).netloc)
     label = slug
@@ -266,16 +318,26 @@ def run_one(c):
     except Exception as e:
         return c, [], str(e)[:60]
 
-def send_email(jobs):
-    user, pw, to = os.environ["SMTP_USER"], os.environ["SMTP_PASS"], os.environ.get("EMAIL_TO") or os.environ["SMTP_USER"]
+def send_mail(subject, body):
+    user, pw = os.environ["SMTP_USER"], os.environ["SMTP_PASS"]
+    to = os.environ.get("EMAIL_TO") or user
     msg = EmailMessage()
-    msg["Subject"] = f"🚀 {len(jobs)} new APM/Product Associate job(s) in Bangalore"
-    msg["From"], msg["To"] = user, to
-    lines = [f"{j['title']}\n{j['company']} | {j['location'] or 'location not shown - check listing'} | Experience: {j.get('exp','not stated')}\nAPPLY NOW: {j['url']}\n" for j in jobs]
-    msg.set_content("\n".join(lines))
+    msg["Subject"], msg["From"], msg["To"] = subject, user, to
+    msg.set_content(body)
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context()) as s:
         s.login(user, pw)
         s.send_message(msg)
+
+def send_email(jobs):
+    blocks = []
+    for j in jobs:
+        bits = [j["company"], j["location"] or "location not shown - check listing",
+                "Experience: " + j.get("exp", "not stated")]
+        if age_str(j.get("posted", "")):
+            bits.append(age_str(j["posted"]))
+        apply = j.get("apply") or j["url"]
+        blocks.append(f"{j['title']}\n" + " | ".join(bits) + f"\nAPPLY NOW: {apply}\n")
+    send_mail(f"\U0001F680 {len(jobs)} new APM/Product Associate job(s) in Bangalore", "\n".join(blocks))
 
 def main():
     seen = set(json.load(open(SEEN_FILE))) if os.path.exists(SEEN_FILE) else set()
@@ -289,18 +351,31 @@ def main():
         (companies if r else no_ats).append(r or n)
     json.dump(resolved, open(RESOLVED_FILE, "w"), indent=1)
     new, dead = [], []
+    total = title_ok = both_ok = 0
+    sample = []
     with ThreadPoolExecutor(max_workers=10) as ex:
         for c, jobs, err in ex.map(run_one, companies):
             if err:
                 dead.append(f"{c[0]}:{c[1]} ({err})")
                 continue
             for j in jobs:
-                if matches(j) and j["id"] not in seen:
-                    seen.add(j["id"])
-                    if too_senior(j):
-                        print("  skipped (experience):", j["title"], "|", j["company"], "|", j["exp"])
-                        continue
-                    new.append(j)
+                total += 1
+                t_ok = bool(TITLE_INCLUDE.search(j["title"]) and not TITLE_EXCLUDE.search(j["title"]))
+                l_ok = bool(loc_ok(j["location"]) or j.get("loc_unknown"))
+                title_ok += t_ok
+                if t_ok and not l_ok:
+                    sample.append(f"{j['title']} | {j['company']} | {j['location']}")
+                if t_ok and l_ok:
+                    both_ok += 1
+                    if j["id"] not in seen:
+                        seen.add(j["id"])
+                        if too_senior(j):
+                            print("  skipped (experience):", j["title"], "|", j["company"], "|", j["exp"])
+                            continue
+                        new.append(j)
+    print(f"Looked at {total} open jobs: {title_ok} had a matching product title, {both_ok} of those in Bangalore/remote India.")
+    if sample:
+        print("Matching titles but OUTSIDE Bangalore (not alerted):", *sample[:15], sep="\n  ")
     print(f"Checked {len(companies)} boards, {len(dead)} unreachable, {len(new)} new matches.")
     if no_ats:
         print("Not found automatically - paste their careers-page URL into companies.txt:", *no_ats, sep="\n  ")
@@ -313,6 +388,12 @@ def main():
         else:
             print("No SMTP secrets set; would have emailed:", *[f"{j['title']} - {j['url']}" for j in new], sep="\n  ")
     json.dump(sorted(seen), open(SEEN_FILE, "w"), indent=0)
+    from datetime import datetime, timezone
+    t = datetime.now(timezone.utc)
+    if t.hour == 3 and t.minute < 10 and os.environ.get("SMTP_USER") and os.environ.get("SMTP_PASS"):
+        send_mail("Job alert bot: daily check-in (still running)",
+                  f"Watching {len(companies)} job boards. {len(dead)} unreachable, {len(no_ats)} not found. "
+                  f"New matches in the last run: {len(new)}. No new-job emails = nothing new matched yet.")
 
 if __name__ == "__main__":
     sys.exit(main())
